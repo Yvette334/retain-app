@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
-const category = require("./category");
 
-const PAY = ["Cash", "Mobile money", "Card"];
+const Pay = ["Cash", "Mobile money", "Card"];
 
 const expenseSchema = new mongoose.Schema({
     user:{
-        type: mongoose.Schema.Types.ObjectId, ref: "User", required: true
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "User", 
+        required: true
     },
     title: {
         type: String,
@@ -15,7 +16,7 @@ const expenseSchema = new mongoose.Schema({
     amount: {
         type: Number, 
         required: true,
-        min: [0.1]
+        min: 0
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
@@ -40,4 +41,4 @@ const expenseSchema = new mongoose.Schema({
 );
 
 module.exports = mongoose.model("Expense", expenseSchema);
-module.exports.payMethod = payMethod;
+module.exports.Pay = Pay;
