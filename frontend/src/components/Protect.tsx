@@ -9,7 +9,7 @@ interface ProctectedRouteProps{
 
 export function ProtectedRoute({children, adminOnly = false}: ProctectedRouteProps) {
     const {user, loading, isAdmin} = useAuth()
-    if(loading) return <p className="center-message">Loading...</p>
+    if(loading) return <p className="load">Loading...</p>
 
     if(!user) return <Navigate to="/login" replace />
     if(adminOnly && !isAdmin) return <Navigate to="/dashboard" replace />

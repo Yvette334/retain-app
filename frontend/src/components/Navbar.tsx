@@ -12,17 +12,16 @@ export default function Navbar() {
     }
 
     return(
-    <header>
-        <span>Retain</span>
-        <nav>
+    <header className="navbar">
+        <span className="logo">Retain</span>
+        <nav className="nav">
             <NavLink to="/dashboard">Dashboard</NavLink>
             <NavLink to="/expenses">Expenses</NavLink>
             {isAdmin && <NavLink to="/admin">Admin</NavLink>}
         </nav>
-        <div>
+        <div className="user">
             <span>{user?.name}</span>
-            <span>{user?.role}</span>
-            <button onClick={handleLogout}>Sign out</button>
+            <button className="btn btn-small btn-light" onClick={handleLogout}>Sign out</button>
         </div>
     </header>
     )

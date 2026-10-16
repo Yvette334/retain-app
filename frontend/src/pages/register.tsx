@@ -11,7 +11,7 @@ export default function Register(){
     const [password, setPassword] = useState("")
     const [submitt, setSubmitt] = useState(false)
 
-    if(loading) return <p className="center-message">Loading...</p>
+    if(loading) return <p className="load">Loading...</p>
     if (user) return <Navigate to={user.role ==="admin" ? "/admin" : "/dashboard"} replace />
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -34,11 +34,11 @@ export default function Register(){
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="main">
+            <form className="form" onSubmit={handleSubmit}>
                 <h1>Create an account</h1>
-                <p>Track your expenses</p>
-                {error && <p>{error}</p> }
+                <p className="sign">Track your expenses</p>
+                {error && <p className="error">{error}</p> }
 
                 <label>
                     Name
@@ -53,10 +53,10 @@ export default function Register(){
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </label>
 
-                <button type="submit" disabled={submitt}>
+                <button className="btn" type="submit" disabled={submitt}>
                     {submitt ? "Creating an account" : "Sign up"}
                 </button>
-                <p>Already have an account <Link to="/login">Sign in</Link></p>
+                <p className="sign">Already have an account? <Link to="/login">Sign in</Link></p>
             </form>
         </div>
     )

@@ -10,7 +10,7 @@ export default function Login(){
     const [password, setPassword] = useState("")
     const [submitt, setSubmitt] = useState(false)
 
-    if(loading) return <p className="center-message">Loading...</p>
+    if(loading) return <p className="load">Loading...</p>
     if (user) return <Navigate to={user.role ==="admin" ? "/admin" : "/dashboard"} replace />
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -28,11 +28,10 @@ export default function Login(){
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <h1>Retain</h1>
-                <p>Sign in</p>
-                {error && <p>{error}</p> }
+        <div className="main">
+            <form className="form" onSubmit={handleSubmit}>
+                <h1>Sign in</h1>
+                {error && <p className="error">{error}</p> }
 
                 <label>
                     Email
@@ -42,10 +41,10 @@ export default function Login(){
                     Password
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </label>
-                <button type="submit" disabled={submitt}>
+                <button className="btn" type="submit" disabled={submitt}>
                     {submitt ? "Signing in" : "Sign in"}
                 </button>
-                <p>Don't have an account? <Link to="/register">Sign up</Link></p>
+                <p className="sign">Don't have an account? <Link to="/register">Sign up</Link></p>
             </form>
         </div>
     )
