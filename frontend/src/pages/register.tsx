@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react"
 import { errorMessage } from "../utils/helpers"
 import { Link, Navigate } from "react-router-dom"
-import { useAuth } from "../context/authContext"
+import { useAuth } from "../context/AuthContext"
 
 export default function Register(){
     const {user, loading, register} = useAuth()
