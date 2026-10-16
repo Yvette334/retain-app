@@ -21,6 +21,21 @@ app.get("/", (req, res) => {
   res.json({ message: "Retain App is running" });
 });
 
+app.use((req, res) =>{
+  res.status(404).json({message: "No route found"})
+})
+
+app.use((err, req, res, next) => {
+  if(err.name === "ValidationError"){
+    const message = Object.values(err.errors).map((e) => e.message).join(",");
+    return res.status(400).json({ message });
+  }
+  if(err.name === "CastError") return res.status(400).json({message: "Invalid value or id"})
+  if(err.code === 11000) return res.status(400).json({message: "This value already exist"})
+    console.error(err)
+  res.status(500).json({message: "Server has some issue"})
+})
+
 mongoose
   .connect(process.env.MONGO)
   .then(() => {
