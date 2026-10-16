@@ -9,6 +9,12 @@ const Budget = require("./models/budget");
 const Category = require("./models/category");
 const Expense = require("./models/expense");
 
+function randomDate (days){
+  const date = faker.date.recent({days})
+  date.setUTCHours(0, 0, 0, 0)
+  return date;
+}
+
 const seedDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO || process.env.MONGO);
@@ -20,7 +26,7 @@ const seedDB = async () => {
     await Budget.deleteMany({});
     console.log("Removed old data");
 
-    const userPass = await bcrypt.hash("User123!", 10);
+    const userPass = await bcrypt.hash("User123", 10);
     const adminPass = await bcrypt.hash("Admin123", 10);
     const users = [
       {
@@ -66,7 +72,7 @@ const seedDB = async () => {
     const budgets = createUsers.map((u) => ({
       user: u._id,
       month: currentMonth,
-      amount: 200,
+      amount: 2500,
     }));
     const createBudgets = await Budget.insertMany(budgets);
     console.log(`Created ${createBudgets.length} budgets`);
@@ -80,10 +86,22 @@ const seedDB = async () => {
         title: "Going to the mall",
         amount: 400.0,
         payMethod: "Card",
-        date: new Date(),
+        date: randomDate(1),
       },
     ];
-    for (let i = 0; i < 50; i++) {
+
+    for(let i = 0; i <30; i++){
+      expenses.push({
+        user: test._id,
+        category: faker.helpers.arrayElement(createCategories)._id,
+        title: faker.commerce.productName(),
+        amount: parseFloat(faker.finance.amount({ min: 5, max: 200, dec: 2 })),
+        payMethod: faker.helpers.arrayElement(payMethods) ,
+        date: randomDate(40),
+      });
+    }
+
+    for (let i = 0; i < 20; i++) {
       const randomUser = faker.helpers.arrayElement(createUsers);
       const randomCategory = faker.helpers.arrayElement(createCategories);
       const randomPayMethod = faker.helpers.arrayElement(payMethods);
@@ -94,7 +112,7 @@ const seedDB = async () => {
         title: faker.commerce.productName(),
         amount: parseFloat(faker.finance.amount({ min: 5, max: 200, dec: 2 })),
         payMethod: randomPayMethod,
-        date: faker.date.recent({ days: 40 }),
+        date: randomDate(40),
       });
     }
     const createExpenses = await Expense.insertMany(expenses);
