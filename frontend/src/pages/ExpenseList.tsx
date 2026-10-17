@@ -78,7 +78,7 @@ export default function ExpensesList(){
 
         return (
             <div>
-                <div className="title">
+                <div className="title-row">
                     <h1>Expenses</h1>
                     <Link className="btn" to="/expenses/new">+ Add</Link>
                 </div>
