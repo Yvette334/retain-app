@@ -48,3 +48,24 @@ export interface ExpenseResult {
 
 export type field = "date" | "amount";
 export type  direction = "asc" |"desc"
+
+export type BudgetStatus = "within" | "no budget" | "approaching" | "over budget"
+
+export interface Budget {
+    month: string;
+    budget: number
+    spent: number
+    remaining: number
+    status: BudgetStatus
+}
+
+export interface CategoryItem {
+    name: string
+    total: number
+}
+
+export interface DashboardData extends Budget {
+    highExpense: Expense | null
+    spending: CategoryItem[]
+    recentExpenses: Expense[]
+}
