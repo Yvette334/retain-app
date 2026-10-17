@@ -1,13 +1,17 @@
 import { useAuth } from "../context/AuthContext";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { reset } from "../store/redux";
 
 export default function Navbar() {
 
     const {user, isAdmin, logout} = useAuth()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     function handleLogout() {
         logout()
+        dispatch(reset())
         navigate("/login")
     }
 
