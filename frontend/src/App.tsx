@@ -6,6 +6,7 @@ import ExpensesList from "./pages/ExpenseList";
 import ExpenseForm from "./pages/ExpenseForm";
 import { ProtectedRoute } from "./components/Protect";
 import Layout from "./components/Layout";
+import Dashboard from "./pages/Dashboard";
 
 export default function App(){
   return (
@@ -18,7 +19,7 @@ export default function App(){
         </ProtectedRoute>
        }
        >
-       <Route path="/dashboard" element={<h1>Dashboard coming soon</h1>}/>
+       <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/expenses" element={<ExpensesList/>}/>
         <Route path="/expenses/new" element={<ExpenseForm/>}/>
         <Route path="/expenses/:id" element={<ExpenseDetail/>}/>
