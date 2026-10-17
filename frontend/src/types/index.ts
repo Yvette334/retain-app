@@ -46,5 +46,5 @@ export interface ExpenseResult {
     pages : number;
 }
 
-export type Field = "date" | "amount";
-export type  Direction = "asc" |"desc"
+export type field = "date" | "amount";
+export type  direction = "asc" |"desc"
