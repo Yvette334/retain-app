@@ -40,7 +40,7 @@ export interface ExpenseData {
 }
 
 export interface ExpenseResult {
-    expenses: ExpenseData[];
+    expenses: Expense[];
     total: number;
     page: number;
     pages : number;
