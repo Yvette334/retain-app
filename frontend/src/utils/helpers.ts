@@ -1,3 +1,5 @@
+import type { BudgetStatus } from "../types";
+
 export function errorMessage(error: unknown): string{
     return error instanceof Error ? error.message: "Something went wrong"
 }
@@ -17,4 +19,12 @@ export function date(iso: string): string {
 
 export function today(): string {
     return new Date().toISOString().slice(0, 10);
+}
+
+export function monthText(): string {
+    return new Date().toISOString().slice(0, 7)
+}
+
+export function getStatusClass(status: BudgetStatus): string {
+    return "status-" + status.replace(" ", "-")
 }
