@@ -239,10 +239,6 @@ main {
   font-size: 1.1rem;
 }
 
-form.form {
-  margin: 0 auto;
-}
-
 .action {
   display: flex;
   align-items: center;
@@ -314,6 +310,52 @@ section dd {
   justify-content: center;
 }
 
+.filters {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+th, td {
+  font-size: 0.9rem;
+  border-bottom: 1px solid #E2E8F0;
+  text-align: left;
+  padding: 10px;
+}
+
+th {
+  font-weight: 600;
+  color:#4A5568
+}
+
+.fill {
+  border-radius: 999px;
+  height: 100%;
+  background-color: #00C853;
+}
+
+.track {
+  margin: 12px 0 8px;
+  border-radius: 999px;
+  background-color: #E2E8F0;
+  height: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+
+@media (min-width: 768) {
+  .filters {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+}
 @media (max-width: 700px) {
   .header {
     padding: 12px 16px;

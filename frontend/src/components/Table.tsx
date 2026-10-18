@@ -9,7 +9,7 @@ interface TableProps {
 export default function Table({title, rows} : TableProps) {
 
     return (
-        <section>
+        <section style={{marginTop: "24px"}}>
             <h2>{title}</h2>
             <div>
                 <table>

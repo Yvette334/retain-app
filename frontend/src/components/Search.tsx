@@ -17,7 +17,7 @@ export default function Search ({categories}: SearchProps) {
     }
 
     return (
-        <div className="flex flex-col md:flex-row gap-2 mb-4">
+        <div className="filters">
             <label>
                 Search
                 <input type="text" placeholder="Search" value={filter.search}

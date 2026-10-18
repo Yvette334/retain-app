@@ -87,16 +87,16 @@ export default function CategoryManage({onChanged}: CategoryProps) {
                 New category
                 <input type="text" value= {name} onChange={(e) => setName(e.target.value)} />
             </label>
-            <button type="submit">Add</button>
+            <button className="btn" type="submit">Add</button>
         </form>
-        {error && <p>{error}</p>}
+        {error && <p className="error">{error}</p>}
 
-        <ul>{categories.map((category) => (
-            <li key={category._id}>
+        <ul style={{listStyle: "none", padding: 0, marginTop: "16px"}}>{categories.map((category) => (
+            <li style={{borderBottom: "1px solid #E2E8F0", padding: "8px 0", display: "flex", justifyContent: "space-between", alignItems: "center"}} key={category._id}>
                 {editId === category._id ? (
                     <>
                     <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} />
-                    <div>
+                    <div style={{display: "flex", gap: "8px", width: "100%"}}>
                         <button onClick={() => handleSave(category._id)}>Save</button>
                         <button onClick={() => setEditId(null) }>Cancel</button>
                     </div>
@@ -106,8 +106,8 @@ export default function CategoryManage({onChanged}: CategoryProps) {
                     <span>
                         {category.name}
                         {!category.isDefault && (
-                            <div>
-                                <button className="btn" onClick={() => startEdit(category)}>Edit</button>
+                            <div className="action">
+                                <button className="light" onClick={() => startEdit(category)}>Edit</button>
                                 <button className="delete" onClick={() => handleDelete(category)}>Delete</button>
                             </div>
                         )}

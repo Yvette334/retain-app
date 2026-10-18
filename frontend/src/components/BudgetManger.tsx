@@ -46,8 +46,8 @@ export default function BudgetManager ({info, onSaved}: BudgetProps) {
             </div>
             {info.budget > 0 && (
                 <>
-                <div>
-                    <div className={`${getStatusClass(info.status)}`} style={{width: `${width}%`}}/>
+                <div className="track">
+                    <div className={`fill ${getStatusClass(info.status)}`} style={{width: `${width}%`}}/>
                     </div>
                     <p>{money(info.spent)} spent of {money(info.budget)} ({used}%)</p>
                 </>

@@ -13,12 +13,14 @@ const big = sorted[0].total
 return (
     <div>
     {sorted.map((item) => (
-        <div key={item.name}>
+        <div key={item.name} style={{marginBottom: "12px"}}>
+            <div style={{display: "flex", justifyContent: "space-between", marginBottom: "4px"}}>
             <span>{item.name}</span>
-            <div>
-                <div style={{width: `${(item.total / big) * 100}%`}}/>
+            <div className="track">
+                <div className="fill" style={{width: `${(item.total / big) * 100}%`}}/>
             </div>
             <span>{money(item.total)}</span>
+        </div>
         </div>
     ))}
     </div>
