@@ -69,7 +69,7 @@ router.get(
       totalUsers,
       totalExpenses,
       totalValue: valueResult.length > 0 ? valueResult[0].total : 0,
-      expensesThisMonth,
+      expenses: expensesThisMonth,
       spendingCat,
       top: most.slice(0, 5),
       bottom: least.slice(0, 5),
