@@ -9,9 +9,9 @@ export default function page({page, pages, onchange}: Pagination){
 
     return(
         <div className="pagination">
-            <button className="page" disabled ={page <= 1}  onClick={() => onchange(page - 1)}>Previous</button>
+            <button className="btn" disabled ={page <= 1}  onClick={() => onchange(page - 1)}>Previous</button>
             <span>Page {page} of {pages}</span>
-            <button className="page" disabled ={page >= pages} onClick={() => onchange(page + 1)}>Next</button>
+            <button className="btn" disabled ={page >= pages} onClick={() => onchange(page + 1)}>Next</button>
         </div>
     )
 }

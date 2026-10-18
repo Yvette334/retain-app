@@ -78,7 +78,7 @@ export default function ExpensesList(){
 
         return (
             <div>
-                <div className="title-row">
+                <div className="title">
                     <h1>Expenses</h1>
                     <Link className="btn" to="/expenses/new">+ Add</Link>
                 </div>
@@ -90,9 +90,9 @@ export default function ExpensesList(){
                 <>
                 <p>{result.total} expense{result.total === 1 ? "" : "s"} found </p>
                 {result?.expenses.length === 0 && !isloading && <p className="no expenses">No expenses</p>}
-                <div className="expenses">
+                <div className="grid">
                 {result?.expenses.map((expense) => (
-                    <article key={expense._id}>
+                    <article key={expense._id} className="card">
                         <div>
                             <h3>{expense.title}</h3>
                             <strong>{money(expense.amount)}</strong>

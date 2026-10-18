@@ -62,7 +62,7 @@ export default function BudgetManager ({info, onSaved}: BudgetProps) {
                         onChange={(e) => setAmount(e.target.value)}
                         />
                 </label>
-                <button type="submit" disabled={saved}>
+                <button className="btn" type="submit" disabled={saved}>
                     {saved ? "Saving..." : "Save budget"}
                 </button>
             </form>

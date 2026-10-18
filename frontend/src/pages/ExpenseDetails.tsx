@@ -48,7 +48,7 @@ return (
         <div className="actions">
             <Link to={`/expenses/${expense._id}/edit`}>Edit</Link>
             <button className="delete" onClick={handleDelete}>Delete</button>
-            <Link className="" to ="/expenses">Back</Link>
+            <Link className="btn" to ="/expenses">Back</Link>
         </div>
     </section>
 )

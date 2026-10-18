@@ -16,7 +16,7 @@ export default function Navbar() {
     }
 
     return(
-    <header className="navbar">
+    <header className="header">
         <span className="logo">Retain</span>
         <nav className="nav">
             <NavLink to="/dashboard">Dashboard</NavLink>
@@ -25,7 +25,7 @@ export default function Navbar() {
         </nav>
         <div className="user">
             <span>{user?.name}</span>
-            <button className="btn btn-small btn-light" onClick={handleLogout}>Sign out</button>
+            <button className="light" onClick={handleLogout}>Sign out</button>
         </div>
     </header>
     )

@@ -32,9 +32,9 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div>
+      <div className="title">
         <h1>Dashboard</h1>
-        <label>
+        <label style={{margin: 0}}>
           Month
           <input
             type="month"
@@ -44,30 +44,30 @@ export default function Dashboard() {
           />
         </label>
       </div>
-      {errorText && <p>{errorText}</p>}
-      {!info && !errorText && <p>Dashboard...</p>}
+      {errorText && <p className="error">{errorText}</p>}
+      {!info && !errorText && <p className="load">Dashboard...</p>}
 
       {info && (
         <>
-          <div>
-            <div>
+          <div className="grid" style={{marginBottom: "24px"}}>
+            <div className="card">
               <span>Total spent</span>
-              <strong>{money(info.spent)}</strong>
+              <strong style={{fontSize: "1.4rem", marginTop: "8px"}}>{money(info.spent)}</strong>
             </div>
-            <div>
+            <div className="card">
               <span>Budget remaining</span>
-              <strong>
+              <strong style={{fontSize: "1.4rem", marginTop: "8px"}}>
                 {info.status === "no budget"
                   ? "No budget"
                   : money(info.remaining)}
               </strong>
             </div>
-            <div>
+            <div className="card">
               <span>Highest Expenses</span>
-              <strong>
+              <strong style={{fontSize: "1.4rem", marginTop: "8px"}}>
                 {info.highExpense ? money(info.highExpense?.amount) : "-"}
               </strong>
-              {info.highExpense && <span>{info.highExpense.title}</span>}
+              {info.highExpense && <span style={{marginTop: "4px"}}>{info.highExpense.title}</span>}
             </div>
           </div>
           <BudgetManager
@@ -75,29 +75,30 @@ export default function Dashboard() {
             info={info}
             onSaved={() => setReload((count) => count + 1)}
           />
-          <section>
+          <section style={{marginTop: "24px", marginBottom: "24px"}}>
             <h2>Spending by category</h2>
             <SpendBar items={info.spending} />
           </section>
-          <section>
-            <div>
-              <h2>Recent expense</h2>
-              <Link to="/expenses">View</Link>
+
+          <section style={{marginTop: "24px"}}>
+            <div className="title" style={{marginBottom: "16px"}}>
+              <h2 style={{margin: 0}}>Recent expense</h2>
+              <Link className="btn" style={{margin: 0}} to="/expenses">View</Link>
             </div>
             {info.recentExpenses.length === 0 && (
               <p>No expenses this month yet.</p>
             )}
-            <ul>
+            <ul style={{listStyle: "none", padding: 0, margin: 0}}>
               {info.recentExpenses.map((expense) => (
-                <li key={expense._id}>
+                <li key={expense._id} style={{display:"flex", justifyContent:"space-between", alignItems: "center", padding:"10px 0", borderBottom: "1px solid #E2E8F0"}}>
                   <span>
-                    <strong>{expense.title}</strong>
-                    <span>
+                    <strong style={{color: "#1A2332", display:"block"}}>{expense.title}</strong>
+                    <span style={{fontSize: "0.85rem", color: "#64748B"}}>
                       {" "}
                       . {expense.category.name} . {date(expense.date)}{" "}
                     </span>
                   </span>
-                  <strong>{money(expense.amount)}</strong>
+                  <strong style={{ color: "#00C853" }}>{money(expense.amount)}</strong>
                 </li>
               ))}
             </ul>

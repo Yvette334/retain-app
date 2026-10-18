@@ -5,6 +5,15 @@ Retain is a full-stack web application project that is build for managing person
 - Live Application:
 - GitHub Link: https://github.com/Yvette334/retain-app.git
 
+## Demo Accounts
+
+You can use the following credentials to test both user and administrator roles:
+
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **Admin** | `admin@retain.com` | `Admin123!` |
+| **User** | `user@retain.com` | `User123!` |
+
 # Main Features
 
 ## User & Authentication
@@ -136,10 +145,12 @@ PORT=5000
 MONGO_URI=your_mongodb_atlas_connection_string
 JWT_SECRET=your_jwt_secret_key
 ```
-### Run backend server:
+### Run backend server and demo data:
 ```
+npm run seed
 npm run dev
 ```
+The API runs at http://localhost:5000. Note that npm run seed clears the database before adding the demo data.
 
 3. Frontend Setup
 
@@ -153,13 +164,15 @@ Create a .env file in the backend root folder:
 ```
 VITE_URL=http://localhost:5000/api
 ```
-### Run backend server:
+### Run frontend server:
 ```
 npm run dev
 ```
 open browser and navigate to http://localhost:5173
 
-## API Endpoints Overview
+## API information
+
+All routes start with **/api**. Routes marked Auth need the header Authorization: Bearer token.
 
 Authentication:
 
@@ -197,3 +210,7 @@ DELETE /api/categories/:id - Delete a category (Admin)
 
 GET /api/admin/insights - Retrieve comprehensive platform statistics (Admin)
 
+## Deployment
+- Database: MongoDB Atlas
+- Backend: Render (root directory backend, build command npm install, start command npm start)
+- Frontend: Vercel (root directory frontend, build command npm run build, output directory dist)

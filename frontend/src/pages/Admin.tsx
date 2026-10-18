@@ -23,8 +23,8 @@ export default function Admin() {
     <div>
       <h1>Admin dashboard</h1>
       <CategoryManage onChanged={() => setReload((count) => count + 1)} />
-      {error && <p>{error}</p>}
-      {!insights && !error && <p className="loading">Loading...</p>}
+      {error && <p className="error">{error}</p>}
+      {!insights && !error && <p className="load">Loading...</p>}
 
       {insights && (
         <>
@@ -51,8 +51,8 @@ export default function Admin() {
             rows={insights.spendingCat}
           />
           <div>
-            <Table title="Most used categories" rows={insights.top} />
-            <Table title="Least used categories" rows={insights.bottom} />
+            <Table title="Top 5 most used categories" rows={insights.top} />
+            <Table title="Bottom 5 least categories" rows={insights.bottom} />
           </div>
           <section>
             <h2>Recently added expenses</h2>
