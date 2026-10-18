@@ -7,6 +7,7 @@ import ExpenseForm from "./pages/ExpenseForm";
 import { ProtectedRoute } from "./components/Protect";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
+import Admin from "./pages/Admin";
 
 export default function App(){
   return (
@@ -24,6 +25,11 @@ export default function App(){
         <Route path="/expenses/new" element={<ExpenseForm/>}/>
         <Route path="/expenses/:id" element={<ExpenseDetail/>}/>
         <Route path="/expenses/:id/edit" element={<ExpenseForm/>}/>
+        <Route path="/admin" element={
+          <ProtectedRoute adminOnly>
+            <Admin />
+          </ProtectedRoute>
+        } />
       </Route>
        <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
