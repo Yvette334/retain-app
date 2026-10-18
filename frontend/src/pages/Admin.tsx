@@ -30,11 +30,11 @@ export default function Admin() {
         <>
           <div>
             <div>
-              <span>Users</span>
+              <span> Registered users</span>
               <strong>{insights.totalUsers}</strong>
             </div>
             <div>
-              <span>Total expenses</span>
+              <span>Total expenses recorded</span>
               <strong>{insights.totalExpenses}</strong>
             </div>
             <div>
@@ -42,7 +42,7 @@ export default function Admin() {
               <strong>{money(insights.totalValue)}</strong>
             </div>
             <div>
-              <span>Expenses this month</span>
+              <span>Expenses for this month</span>
               <strong>{insights.expenses}</strong>
             </div>
           </div>
@@ -55,7 +55,7 @@ export default function Admin() {
             <Table title="Least used categories" rows={insights.bottom} />
           </div>
           <section>
-            <h2>Added expenses</h2>
+            <h2>Recently added expenses</h2>
             <div>
               <table>
                 <thead>
