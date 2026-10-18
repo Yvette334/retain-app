@@ -69,3 +69,36 @@ export interface DashboardData extends Budget {
     spending: CategoryItem[]
     recentExpenses: Expense[]
 }
+
+export interface CategoryStat {
+    id: string
+    name: string
+    count: number
+    total: number
+}
+
+export interface AdminExpense extends Expense {
+    user: {_id: string; name: string; email: string}
+}
+
+export interface UserItem {
+    _id: string
+    name: string
+    email: string
+    role: Role
+    createdAt: string
+}
+
+export interface Insights {
+    totalUsers: number
+    totalExpenses: number
+    totalValue: number
+    expenses: number
+    spendingCat: CategoryStat[]
+    recentUsers: UserItem[]
+    recentExpenses: AdminExpense[]
+    top: CategoryStat[]
+    bottom: CategoryStat[]
+    
+
+}
