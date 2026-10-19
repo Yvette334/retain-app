@@ -27,7 +27,7 @@ You can use the following credentials to test both user and administrator roles:
 
 - **Expense CRUD** : Create, read, update and delete expenses including titles, amount, categories, dates, payment methods and notes.
 
-- **Filter & Sorting**: Manage all expense filering, searching and sorting using React Redux.
+- **Filter, Search and Sorting**: Manage all expense filering, searching and sorting using React Redux. The result are paginated
 
 - **Monthly Budgets**: Allows users to set/update a budget and view, Total amount spent and remaining budget, if it is within, approaching, or over budget
 
@@ -60,65 +60,48 @@ This project is structured with a repo that contain frontend and backend code.
 
 ```
 retain-app/
-├── backend/                # Node.js & Express REST API server
-│   ├── models/             # Mongoose database models
-│   ├── routes/             # API Endpoints
-│   │   ├── admin.js        # Platform insights & audit logs
-│   │   ├── auth.js         # Authentication workflow
-│   │   ├── budget.js       # Monthly budget logic
-│   │   ├── categories.js   # Category management CRUD
-│   │   ├── dashboard.js    # Financial metrics
-│   │   `-- expenses.js     # Expense CRUD & filtering
-│   ├── utils/              # Backend helper scripts
+├── backend/                  # Node.js and Express REST API
+│   ├── middleware/
+│   │   └── auth.js           # Token check (auth) and admin check (adminOnly)
+│   ├── models/               # Mongoose models (user, category, expense, budget)
+│   ├── routes/
+│   │   ├── admin.js          # Platform insights (admin only)
+│   │   ├── auth.js           # Register, login and current user
+│   │   ├── budget.js         # Monthly budget
+│   │   ├── categories.js     # Category list and admin CRUD
+│   │   ├── dashboard.js      # Monthly dashboard summary
+│   │   └── expenses.js       # Expense CRUD, search, filters, sorting, pagination
+│   ├── utils/
 │   │   ├── budgetSummary.js
 │   │   ├── handler.js
-│   │   `-- month.js
-│   ├── server.js           # Express app entry point & MongoDB Atlas connection
-│   ├── seed.js             # Initial database seeding script
-│   `-- package.json        # Backend dependencies & scripts
+│   │   └── month.js
+│   ├── server.js             # Express app and MongoDB connection
+│   ├── seed.js               # Demo data script (uses Faker)
+│   └── package.json
 │
-└── frontend/               # React & TypeScript client application
-    ├── public/             # Static assets (favicons, icons)
-    │   ├── favicon.svg
-    │   `-- icons.svg
-    ├── src/                # Frontend source code
+└── frontend/                 # React and TypeScript client
+    ├── public/
+    ├── src/
     │   ├── api/
-    │   │   `-- api.ts      # Centralized API configuration
-    │   ├── components/     # UI components (BudgetManager, CategoryManager, Table, etc.)
-    │   │   ├── BudgetManger.tsx
-    │   │   ├── CategoryManager.tsx
-    │   │   ├── Layout.tsx
-    │   │   ├── Navbar.tsx
-    │   │   ├── Pagination.tsx
-    │   │   ├── Protect.tsx
-    │   │   ├── Search.tsx
-    │   │   ├── SpendBar.tsx
-    │   │   `-- Table.tsx
+    │   │   └── api.ts        # One function for every API call
+    │   ├── components/       # BudgetManger, CategoryManager, Layout, Navbar,
+    │   │                     # Pagination, Protect, Search, SpendBar, Table
     │   ├── context/
-    │   │   `-- AuthContext.tsx # Authentication state management
-    │   ├── pages/          # Page views (Dashboard, Admin, ExpenseList, etc.)
-    │   │   ├── Admin.tsx
-    │   │   ├── Dashboard.tsx
-    │   │   ├── ExpenseDetails.tsx
-    │   │   ├── ExpenseForm.tsx
-    │   │   ├── ExpenseList.tsx
-    │   │   ├── Login.tsx
-    │   │   `-- Register.tsx
-    │   ├── store/          # Redux Toolkit store & slices
-    │   │   ├── hooks.ts
-    │   │   ├── redux.ts
-    │   │   `-- store.ts
+    │   │   └── AuthContext.tsx   # Authentication state and roles
+    │   ├── pages/            # Admin, Dashboard, ExpenseDetails, ExpenseForm,
+    │   │                     # ExpenseList, Login, Register
+    │   ├── store/            # Redux Toolkit: hooks.ts, redux.ts (slice), store.ts
     │   ├── types/
-    │   │   `-- index.ts    # Global TypeScript interfaces
+    │   │   └── index.ts      # TypeScript types
     │   ├── utils/
-    │   │   `-- helpers.ts  # Formatting & helper utilities
-    │   ├── App.tsx         # Main routing and layout integration
-    │   ├── index.css       # Global styles
-    │   ├── main.tsx        # React entry point
-    │   └── payment.ts      # Payment options
-    ├── package.json        # Frontend dependencies & scripts
-    ├── tsconfig.json       # TypeScript configuration
-    └── vite.config.ts      # Vite configuration
+    │   │   └── helpers.ts    # Formatting helpers
+    │   ├── App.tsx           # Routes
+    │   ├── index.css         # Styles
+    │   ├── main.tsx          # Entry point
+    │   └── payment.ts        # Payment methods and budget status text
+    ├── package.json
+    ├── tsconfig.json
+    └── vite.config.ts
 ```
 
 ## Setup and installation
@@ -175,41 +158,27 @@ open browser and navigate to http://localhost:5173
 
 All routes start with **/api**. Routes marked Auth need the header Authorization: Bearer token.
 
-Authentication:
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| POST | `/api/auth/register` | Public | Create a user account |
+| POST | `/api/auth/login` | Public | Sign in and receive a token |
+| GET | `/api/auth/me` | Auth | Get the signed-in user |
+| GET | `/api/expenses` | Auth | List your expenses (search, filters, sort, pagination) |
+| POST | `/api/expenses` | Auth | Create an expense |
+| GET | `/api/expenses/:id` | Auth | Get one expense |
+| PUT | `/api/expenses/:id` | Auth | Update an expense |
+| DELETE | `/api/expenses/:id` | Auth | Delete an expense |
+| GET | `/api/budget/:month` | Auth | Get the budget summary for a month |
+| PUT | `/api/budget/:month` | Auth | Set or update the budget, body `{ "amount": 3000 }` |
+| GET | `/api/dashboard?month=YYYY-MM` | Auth | Monthly dashboard summary |
+| GET | `/api/categories` | Auth | List categories |
+| POST | `/api/categories` | Admin | Create a category |
+| PUT | `/api/categories/:id` | Admin | Rename a category |
+| DELETE | `/api/categories/:id` | Admin | Delete a category (its expenses move to Uncategorized) |
+| GET | `/api/admin/insights` | Admin | Platform insights |
 
-POST /api/auth/register - Register a new user
+**Query parameters for `GET /api/expenses`:** `search`, `category`, `payMethod`, `startDate`, `endDate`, `minAmount`, `maxAmount`, `sortBy` (`date` or `amount`), `order` (`asc` or `desc`), `page`, `limit`.
 
-POST /api/auth/login - Authenticate user & receive token
-
-Expenses:
-
-GET /api/expenses - Retrieve filtered/paginated expenses
-
-POST /api/expenses - Create a new expense
-
-GET /api/expenses/:id - Get single expense details
-
-PUT /api/expenses/:id - Update an expense
-
-DELETE /api/expenses/:id - Delete an expense
-
-Budgets & Dashboard:
-
-GET /api/dashboard?month=YYYY-MM - Fetch monthly summary metrics
-
-PUT /api/budget/:month - Set or update monthly budget
-
-Categories & Admin:
-
-GET /api/categories - Fetch all expense categories
-
-POST /api/categories - Create a new category (Admin)
-
-PUT /api/categories/:id - Update a category (Admin)
-
-DELETE /api/categories/:id - Delete a category (Admin)
-
-GET /api/admin/insights - Retrieve comprehensive platform statistics (Admin)
 
 ## Deployment
 - Database: MongoDB Atlas
