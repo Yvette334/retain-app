@@ -2,7 +2,7 @@
 Retain is a full-stack web application project that is build for managing personal expenses and monthly budgets using React with TypeScript and Vite for the frontend and a backend API (JavaScript or Python) to manage financial data.
 
 # Live Demo & Deploymnet 
-- Frontend deploy: https://retain-app-psi.vercel.app/login
+- Frontend deploy: https://retain-app-psi.vercel.app
 - Backend deploy: https://retain-app-sf1e.onrender.com
 - GitHub Link: https://github.com/Yvette334/retain-app.git
 
