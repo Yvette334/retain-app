@@ -28,36 +28,36 @@ export default function Admin() {
 
       {insights && (
         <>
-          <div>
-            <div>
-              <span> Registered users</span>
-              <strong>{insights.totalUsers}</strong>
+          <div className="statgrid">
+            <div className="statcard">
+              <span className="statlabel">Registered users</span>
+              <strong className="statvalue">{insights.totalUsers}</strong>
             </div>
-            <div>
-              <span>Total expenses recorded</span>
-              <strong>{insights.totalExpenses}</strong>
+            <div className="statcard">
+              <span className="statlabel">Total expenses recorded</span>
+              <strong className="statvalue">{insights.totalExpenses}</strong>
             </div>
-            <div>
-              <span>Total value of expenses</span>
-              <strong>{money(insights.totalValue)}</strong>
+            <div className="statcard">
+              <span className="statlabel">Total value of expenses</span>
+              <strong className="statvalue">{money(insights.totalValue)}</strong>
             </div>
-            <div>
-              <span>Expenses for this month</span>
-              <strong>{insights.expenses}</strong>
+            <div className="statcard">
+              <span className="statlabel">Expenses for this month</span>
+              <strong className="statvalue">{insights.expenses}</strong>
             </div>
           </div>
           <Table
             title="Total spending per category"
             rows={insights.spendingCat}
           />
-          <div>
+          <div className="tablegrid">
             <Table title="Top 5 most used categories" rows={insights.top} />
             <Table title="Bottom 5 least categories" rows={insights.bottom} />
           </div>
           <section>
             <h2>Recently added expenses</h2>
-            <div>
-              <table>
+            <div className="tablewrap">
+              <table className="datatable">
                 <thead>
                   <tr>
                     <th>Title</th>
@@ -84,8 +84,8 @@ export default function Admin() {
 
           <section>
             <h2>Registered users</h2>
-            <div>
-              <table>
+            <div className="tablewrap">
+              <table className="datatable">
                 <thead>
                   <tr>
                     <th>Name</th>

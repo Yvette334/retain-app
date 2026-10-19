@@ -9,10 +9,10 @@ interface TableProps {
 export default function Table({title, rows} : TableProps) {
 
     return (
-        <section style={{marginTop: "24px"}}>
+        <section className="tablesection">
             <h2>{title}</h2>
-            <div>
-                <table>
+            <div className="tablewrap">
+                <table className="datatable">
                     <thead>
                         <tr>
                             <th>Category</th>

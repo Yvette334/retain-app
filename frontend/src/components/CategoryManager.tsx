@@ -82,41 +82,40 @@ export default function CategoryManage({onChanged}: CategoryProps) {
   return (
     <section>
         <h2>Manage categories</h2>
-        <form onSubmit={handleCreate}>
-            <label>
-                New category
-                <input type="text" value= {name} onChange={(e) => setName(e.target.value)} />
-            </label>
+        <form className="catform" onSubmit={handleCreate}>
+            <input type="text" placeholder="New category name" value={name} onChange={(e) => setName(e.target.value)} />
             <button className="btn" type="submit">Add</button>
         </form>
         {error && <p className="error">{error}</p>}
 
-        <ul style={{listStyle: "none", padding: 0, marginTop: "16px"}}>{categories.map((category) => (
-            <li style={{borderBottom: "1px solid #E2E8F0", padding: "8px 0", display: "flex", justifyContent: "space-between", alignItems: "center"}} key={category._id}>
-                {editId === category._id ? (
-                    <>
-                    <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} />
-                    <div style={{display: "flex", gap: "8px", width: "100%"}}>
-                        <button onClick={() => handleSave(category._id)}>Save</button>
-                        <button onClick={() => setEditId(null) }>Cancel</button>
+        <ul className="catlist">
+          {categories.map((category) => (
+            <li key={category._id} className="catrow">
+              {editId === category._id ? (
+                <div className="catedit">
+                  <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} />
+                  <div className="cateditbtns">
+                    <button className="btn" onClick={() => handleSave(category._id)}>Save</button>
+                    <button className="outline" onClick={() => setEditId(null)}>Cancel</button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <span className="catname">
+                    {category.name}
+                    {category.isDefault && <span className="badge defaultbadge">Default</span>}
+                  </span>
+                  {!category.isDefault && (
+                    <div className="catbtns">
+                      <button className="btn" onClick={() => startEdit(category)}>Edit</button>
+                      <button className="delete" onClick={() => handleDelete(category)}>Delete</button>
                     </div>
-                    </>
-                ) : (
-                    <>
-                    <span>
-                        {category.name}
-                        {!category.isDefault && (
-                            <div className="action">
-                                <button className="light" onClick={() => startEdit(category)}>Edit</button>
-                                <button className="delete" onClick={() => handleDelete(category)}>Delete</button>
-                            </div>
-                        )}
-                    </span>
-                    </>
-                )}
-                </li>
-             ))}
-             </ul>
-             </section>
-             )
-            }
+                  )}
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+    </section>
+  )
+}

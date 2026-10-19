@@ -27,8 +27,9 @@ async function handleDelete() {
         setErrorText(errorMessage(err))
     }   
 }
+
 if (errorText) return <p className="error">{errorText}</p>
-if (!expense) return <p className="loading">Loading ...</p>
+if (!expense) return <p className="load">Loading ...</p>
 
 return (
     <section>
@@ -48,7 +49,7 @@ return (
         <div className="actions">
             <Link to={`/expenses/${expense._id}/edit`}>Edit</Link>
             <button className="delete" onClick={handleDelete}>Delete</button>
-            <Link className="btn" to ="/expenses">Back</Link>
+            <Link className="btn" to="/expenses">Back</Link>
         </div>
     </section>
 )

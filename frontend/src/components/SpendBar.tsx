@@ -11,16 +11,14 @@ const sorted = [...items].sort((a,b) => b.total - a.total)
 const big = sorted[0].total
 
 return (
-    <div>
+    <div className="bars">
     {sorted.map((item) => (
-        <div key={item.name} style={{marginBottom: "12px"}}>
-            <div style={{display: "flex", justifyContent: "space-between", marginBottom: "4px"}}>
-            <span>{item.name}</span>
-            <div className="track">
-                <div className="fill" style={{width: `${(item.total / big) * 100}%`}}/>
+        <div key={item.name} className="barrow">
+            <span className="barlabel">{item.name}</span>
+            <div className="bartrack">
+                <div className="barfill" style={{width: `${(item.total / big) * 100}%`}}/>
             </div>
-            <span>{money(item.total)}</span>
-        </div>
+            <span className="baramount">{money(item.total)}</span>
         </div>
     ))}
     </div>

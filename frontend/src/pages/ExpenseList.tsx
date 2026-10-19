@@ -85,11 +85,11 @@ export default function ExpensesList(){
 
             <Search categories={categories} />
             {errorText && <p className="error">{errorText}</p>}
-            {isloading && <p className="loading">Loading expenses...</p>}
+            {isloading && <p className="load">Loading expenses...</p>}
             {result && (
                 <>
                 <p>{result.total} expense{result.total === 1 ? "" : "s"} found </p>
-                {result?.expenses.length === 0 && !isloading && <p className="no expenses">No expenses</p>}
+                {result?.expenses.length === 0 && !isloading && <p>No expenses</p>}
                 <div className="grid">
                 {result?.expenses.map((expense) => (
                     <article key={expense._id} className="card">
@@ -97,7 +97,7 @@ export default function ExpensesList(){
                             <h3>{expense.title}</h3>
                             <strong>{money(expense.amount)}</strong>
                         </div>
-                        <p>{expense.category.name}.{expense.payMethod}</p>
+                        <p>{expense.category.name} &middot; {expense.payMethod}</p>
                         <p>{date(expense.date)}</p>
                         <div className="actions">
                             <Link to={`/expenses/${expense._id}/edit`}>Edit</Link>

@@ -86,8 +86,10 @@ export default function Search ({categories}: SearchProps) {
                     <option value="amount-desc">Highest</option>
                     <option value="amount-asc">Lowest</option>
                 </select>
-                <button className="btn" onClick={() => dispatch(reset())}>Clear</button>
             </label>
+            <div className="clearwrap">
+                <button className="btn" onClick={() => dispatch(reset())}>Clear</button>
+            </div>
         </div>
     )
 }

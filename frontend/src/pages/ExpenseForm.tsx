@@ -166,7 +166,7 @@ export default function ExpenseForm() {
           onChange={handleChange}
         />
       </label>
-      <div className="actions">
+      <div className="formbtns">
         <button className="btn" type="submit" disabled={saving}>
           {saving ? "Saving..." : "Save"}
         </button>

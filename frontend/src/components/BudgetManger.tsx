@@ -40,19 +40,19 @@ export default function BudgetManager ({info, onSaved}: BudgetProps) {
 
     return (
         <section>
-            <div>
+            <div className="budgetheader">
                 <h2>Monthly budget</h2>
-                <span className={`${getStatusClass(info.status)}`}>{STATUS[info.status]}</span>
+                <span className={`status ${getStatusClass(info.status)}`}>{STATUS[info.status]}</span>
             </div>
             {info.budget > 0 && (
                 <>
                 <div className="track">
                     <div className={`fill ${getStatusClass(info.status)}`} style={{width: `${width}%`}}/>
-                    </div>
-                    <p>{money(info.spent)} spent of {money(info.budget)} ({used}%)</p>
+                </div>
+                <p className="budgetmeta">{money(info.spent)} spent of {money(info.budget)} ({used}%)</p>
                 </>
             )}
-            <form onSubmit={saveBudget}>
+            <form className="budgetform" onSubmit={saveBudget}>
                 <label>
                     {info.budget > 0 ? "Update the budget" : "Set the budget"}
                     <input
