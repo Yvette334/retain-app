@@ -2,7 +2,8 @@
 Retain is a full-stack web application project that is build for managing personal expenses and monthly budgets using React with TypeScript and Vite for the frontend and a backend API (JavaScript or Python) to manage financial data.
 
 # Live Demo & Deploymnet 
-- Live Application:
+- Frontend deploy: https://retain-app-silk.vercel.app/login
+- Backend deploy: https://retain-app-sf1e.onrender.com
 - GitHub Link: https://github.com/Yvette334/retain-app.git
 
 ## Demo Accounts
@@ -11,8 +12,8 @@ You can use the following credentials to test both user and administrator roles:
 
 | Role | Email | Password |
 | :--- | :--- | :--- |
-| **Admin** | `admin@retain.com` | `Admin123!` |
-| **User** | `user@retain.com` | `User123!` |
+| **Admin** | `admin@gmail.com` | `Admin123` |
+| **User** | `user@gmail.com` | `User123` |
 
 # Main Features
 
